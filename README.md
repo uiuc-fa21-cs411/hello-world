@@ -14,6 +14,8 @@
 
 This is a test project just to show what we expect from you (TBD)
 
+[Link to Project Description](https://github.com/uiuc-fa21-cs411/hello-world/blob/main/ProjectDescription.md)
+
 ## System Demo URL
 
 link to your project main page (TBD)
