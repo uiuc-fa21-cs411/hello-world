@@ -21,6 +21,15 @@ def index():
     return render_template('index.html')
 
 
+@app.route('/all', methods=['GET'])
+def index():
+    cur = cnx.cursor()
+    res = cur.execute("SELECT * FROM MyMovies")
+    cnx.commit()
+    cur.close()
+    return res
+
+
 def sigint_handler(signal_received, frame):
     global cnx
     print('SIGINT or CTRL-C detected. Exiting gracefully')
