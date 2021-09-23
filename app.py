@@ -21,11 +21,11 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/all', methods=['GET'])
-def index():
+@app.route('/showall', methods=['GET'])
+def showall():
     cur = cnx.cursor()
-    res = cur.execute("SELECT * FROM MyMovies")
-    cnx.commit()
+    cur.execute("SELECT * FROM MyMovies")
+    res = '\n'.join([str(tid) + ', ' + title + ', ' + genre + ', ' + str(length) for tid, title, genre, length in cur])
     cur.close()
     return res
 
