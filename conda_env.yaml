@@ -1,10 +1,9 @@
-name: cs411-ta
+name: cs411-sample-moviedb
 channels:
   - defaults
 dependencies:
   - ca-certificates=2021.7.5
   - certifi=2021.5.30
-  - libcxx=12.0.0
   - libffi=3.3
   - ncurses=6.2
   - openssl=1.1.1l
