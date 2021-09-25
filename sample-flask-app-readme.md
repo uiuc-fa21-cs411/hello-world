@@ -26,4 +26,6 @@ You will be able to create virtual conda environments and isolate your project d
 the exact dependencies mentioned in `conda_env.yaml`.
 7. Edit line 6 in `app.py` to add your own MySQL credentials and database name. The database should be the same as the
 one used in step 3.2.
-8. `flask run --host=0.0.0.0 --port=10001` Run the app and hack around!
+8. `conda activate cs411-sample-moviedb` Run this command before installing any other dependencies. It will ensure that
+all your packages are isolated from server-wide updates/installations.
+9. `flask run --host=0.0.0.0 --port=10001` Run the app and hack around!
