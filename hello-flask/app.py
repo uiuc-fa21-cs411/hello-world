@@ -3,7 +3,7 @@ import mysql.connector
 from signal import SIGINT, signal
 
 app = Flask(__name__)
-cnx = mysql.connector.connect(user='', password='', host='localhost', database='')
+cnx = mysql.connector.connect(user='root', password='', host='localhost', database='')
 
 
 @app.route('/', methods=['GET', 'POST'])
