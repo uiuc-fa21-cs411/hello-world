@@ -52,7 +52,7 @@ def process_query():
 def insert_into_sqlite(csvfile):
     con = sqlite3.connect(sqlite_uri)
     cur = con.cursor()
-    cur.execute('''create table airports (
+    cur.execute('''create table if not exists airports (
         IATA_CODE TEXT, 
         AIRPORT TEXT,
         CITY TEXT,
@@ -69,5 +69,5 @@ def insert_into_sqlite(csvfile):
 
 if __name__ == '__main__':
     insert_into_sqlite('data/airports.csv')
-    app.run(host='0.0.0.0', port=10001)
+    app.run(host='0.0.0.0', port=10001, use_debugger=True, use_reloader=True)
 

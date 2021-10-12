@@ -4,20 +4,6 @@ $( document ).ready(function() {
     plotly_canvas_result_table = document.getElementById('canvas-result-table')
     plotly_canvas_result_plot = document.getElementById('canvas-result-plot')
 
-    function init() {
-        Plotly.newPlot( plotly_canvas_result_table, [{
-                x: [1, 2, 3, 4, 5],
-                y: [1, 2, 4, 8, 16] 
-            }], { 
-                margin: { t: 0 } 
-            }, {
-                showSendToCloud: true
-            }
-        )
-    }
-
-    init();
-
     getData = function (query_string) {
         query_string = $("#sql-text-area").val();
         $.post( "/query", {
