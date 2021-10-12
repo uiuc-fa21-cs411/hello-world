@@ -32,7 +32,7 @@ all your packages are isolated from server-wide updates/installations.
 10. Add some movies at 20.88.14.242:10001. They should show up in a list at 20.88.14.242:10001/showall. Happy hacking!
 
 
-conda activate
+conda activate cs411-hello-flask
 
 FLASK_APP=app.py FLASK_DEBUG=1 flask run
  

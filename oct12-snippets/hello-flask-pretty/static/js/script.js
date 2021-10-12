@@ -21,9 +21,8 @@ $( document ).ready(function() {
     getData = function (query_string) {
         query_string = $("#sql-text-area").val();
         $.post( "/query", {
-            query_string: JSON.stringify(query_string)
-        }, function(result){
-
+            query_string: query_string
+        }, function(result, status){
             result_data = result['data']
 
             // update table
@@ -56,9 +55,7 @@ $( document ).ready(function() {
             ]
             Plotly.newPlot(plotly_canvas_result_plot, bar_data)
 
-            console.log(result)
-            console.log(result['result'])
-        })
+        }, 'json')
     }
 
     $("#sendButton").click(function() {

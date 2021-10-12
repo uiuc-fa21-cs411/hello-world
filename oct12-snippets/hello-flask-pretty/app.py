@@ -1,25 +1,16 @@
-import mysql.connector
+import math
+import sqlite3
+import pandas
 from flask import Flask, render_template, make_response
 from flask import redirect, request, jsonify, url_for
+from flask import stream_with_context, Response
 
 
+sqlite_uri = 'airports.db'
+row_limit = 1000
 app = Flask(__name__)
-cnx = mysql.connector.connect(user='root', password='', host='localhost', database='')
 
-
-# @app.route('/', methods=['GET', 'POST'])
-# def index():
-#     if request.method == "POST":
-#         details = request.form
-#         title = details['title']
-#         length = details['length']
-#         genre = details['genre']
-#         cur = cnx.cursor()
-#         cur.execute("INSERT INTO MyMovies(title, length, genre) VALUES (%s, %s, %s)", (title, length, genre))
-#         cnx.commit()
-#         cur.close()
-#         return 'success'
-#     return render_template('index.html')
+airport_data = []
 
 
 @app.route('/', methods=['GET'])
@@ -30,20 +21,53 @@ def index():
 
 @app.route('/query', methods=['POST'])
 def process_query():
-    print(request)
     sql = request.form['query_string']
-    return {
+    con = sqlite3.connect(sqlite_uri)
+    df = pandas.read_sql_query(sql, con).head(row_limit)
+    con.close()
+
+    def make_valid(v):
+        if v != v:
+            return None
+        else:
+            return v
+
+    column_labels = [col for col in df.columns]
+    per_col_values = [
+        [make_valid(value) for value in df[col]]
+        for col in df.columns
+    ]
+
+    response = {
         "query_string": sql,
         "data": {
-            "labels": [['col1'], ['col2']],
-            "values": [
-                [1], 
-                [2]
-            ]
+            "labels": [[col] for col in column_labels],
+            "values": per_col_values
         }
     }
 
+    print(response)
+    return response
+
+def insert_into_sqlite(csvfile):
+    con = sqlite3.connect(sqlite_uri)
+    cur = con.cursor()
+    cur.execute('''create table airports (
+        IATA_CODE TEXT, 
+        AIRPORT TEXT,
+        CITY TEXT,
+        STATE TEXT,
+        COUNTRY TEXT,
+        LATITUDE REAL,
+        LONGITUDE REAL ) ''')
+    con.commit()
+    df = pandas.read_csv(csvfile)
+    df.to_sql('airports', con, if_exists='replace', index=False)
+    con.commit()
+    con.close()
+
 
 if __name__ == '__main__':
+    insert_into_sqlite('data/airports.csv')
     app.run(host='0.0.0.0', port=10001)
 
