@@ -13,7 +13,7 @@ bash Miniconda3-py39_4.10.3-Linux-x86_64.sh
 ## Git clone
 
 ```
-git clone git@github.com:uiuc-fa21-cs411/hello-world.git
+git clone https://github.com/uiuc-fa21-cs411/hello-world.git
 cd hello-world/oct12-snippets/hello-flask-pretty/
 ```
 
