@@ -15,6 +15,8 @@
 This is a test project just to show what we expect from you (TBD)
 
 [Link to Project Description](https://github.com/uiuc-fa21-cs411/hello-world/blob/main/ProjectDescription.md)
+[Link to Conceptual Design](https://github.com/uiuc-fa21-cs411/hello-world/blob/main/ConceptualDesign.md)
+[Link to Database Design](https://github.com/uiuc-fa21-cs411/hello-world/blob/main/DatabaseDesign.md)
 
 ## System Demo URL
 
